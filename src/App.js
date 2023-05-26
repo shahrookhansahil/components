@@ -3,17 +3,15 @@ import Header from './Components/Header';
 import Timer from './Components/Timer';
 import Select from './Components/Select';
 import Form from './Components/Form';
-import Cntxt from './Contexts/component1';
 import SideNav from './Components/SideNav';
 import Car from './Components/Car';
-import { useState, createContext } from 'react';
-
-const myContext = createContext();
+import { useState } from 'react';
+import { PersonProvider } from './Components/PersonContext';
+import { UserProvider } from './Components/UserContext';
+import A from './Components/A';
+import B from './Components/B';
+import { SubjectProvider } from './Components/SubjectContext';
 function App() {
-  const std = {
-    name : "Sahil",
-    age : 23
-  }
   const [likes, setLikes] = useState(0);
   function HandleLikes(){
           setLikes(likes+5);
@@ -24,28 +22,29 @@ const [name, setName] = useState("Sahil");
   }
   const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton'];
   return (
-    <div className="App">
-      <myContext.Provider value={std}>
-        
-      </myContext.Provider>
-        <Header title = "This Is Header" name ="Sahil khan" />
-     <Form/>
-        <SideNav/>
-        <Car/>
-        <Select/>
-        <Cntxt/>
+    <>
+    <PersonProvider value={'Shahroo Khan Sahil'}>
+      <A/>
+    </PersonProvider>
+    <UserProvider value={'sahil@18'}>
+      <B/>
+    </UserProvider>
 
-
-     <div id='a'>
-
-     </div>
-        <button onClick={HandleLikes}>Like {likes}</button>
-        <br/>
-        <button onClick={ChangeName}>My Name Is : {name}</button>
-       
-      <Timer/>
-      <component1/>
-    </div>
+    <SubjectProvider value={'Java'}>
+      <A/>
+    </SubjectProvider>    
+  </>
+    // <div className="App">      
+    //   <Header title = "This Is Header" name ="Sahil khan" />
+    //  <Form/>
+    //     <SideNav/>
+    //     <Car/>
+    //     <Select/>
+    //     <button onClick={HandleLikes}>Like {likes}</button>
+    //     <br/>
+    //     <button onClick={ChangeName}>My Name Is : {name}</button>       
+    //   <Timer/>      
+    // </div>
   );
 }
 
